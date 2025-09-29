@@ -77,6 +77,31 @@ Use:
 data.content   // the quote text
 data.author    // the author
 */
+
+let btn2 = document.getElementById("t3-loadQuote")
+
+btn2.addEventListener("click", function () {
+
+fetch("https://dummyjson.com/quotes/random")
+  .then(function (response) {
+    if (!response.ok) {                 // not 2xx → treat as an error
+      throw new Error("HTTP " + response.status);
+    }
+    return response.json();             // turn response body into JS object
+  })
+  .then(function (data) {
+    // use the JSON data here
+    let msg = data.quote;
+    let auth = data.auther;
+    document.getElementById("t3-quote").innerHTML = msg;
+    document.getElementById("t3-author").innerHTML = auth;
+  })
+  .catch(function (err) {
+    // show a friendly message or handle the error
+    console.log("No Quote for today");
+    
+  });
+});
  
 
 /*  
